@@ -50,11 +50,12 @@ Work through these in order. The frontend objective depends on the backend suppo
 
 Wire these up in `server/src/services/auditLogService.js`. The handler in `server/src/routes/auditLogs.js` already forwards them, so you shouldn't need to touch it. The Prisma schema lives in `server/prisma/schema.prisma`.
 
-A few things we'll be looking at:
+A test suite at `server/src/services/auditLogService.test.js` doubles as the spec. Run `make test` and make them all green. Add more cases if you see something worth covering.
+
+A few other things we'll be looking at:
 
 - Input validation. What happens when `sortField` is `"; DROP TABLE audit_logs"`?
 - Whether sorting and filtering happen in the database or in JS after the fact.
-- Tests. There's no test runner wired up. Pick one (`node --test`, vitest, jest, whatever) and write some.
 
 ### 2. Frontend DateTimeRangePicker
 
