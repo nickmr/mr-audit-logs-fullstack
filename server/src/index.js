@@ -9,6 +9,10 @@ app.use(express.json());
 app.use('/api/audit-logs', auditLogsRouter);
 
 app.use((error, _request, response, _next) => {
+  if (typeof error.statusCode === 'number') {
+    response.status(error.statusCode).json({ error: error.message });
+    return;
+  }
   console.error(error);
   response.status(500).json({ error: 'Internal server error' });
 });
