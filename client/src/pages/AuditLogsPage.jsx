@@ -39,7 +39,7 @@ export default function AuditLogsPage() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack>
         <Stack direction='row' justifyContent='center' padding={1}>
-          <Typography variant='h5'>Audit Log</Typography>
+          <Typography variant='h5'>Audit Logs</Typography>
         </Stack>
         <Stack justifyContent='center' padding={2}>
           <Stack direction='row' pb={2} spacing={2}>
