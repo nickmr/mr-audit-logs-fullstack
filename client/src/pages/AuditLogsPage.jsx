@@ -11,7 +11,7 @@ LicenseInfo.setLicenseKey('Xse7c1bbvzdreH3dtzlPPU1VSS1Eb2MsRT0gMTcyNTkwOTY1OSxTP
 const COLUMNS = [
   {
     field: 'userName',
-    headerName: 'Emailz',
+    headerName: 'Email',
     width: 150,
     valueGetter: (value, row) => `${row.user.email}`,
   },
@@ -39,7 +39,7 @@ export default function AuditLogsPage() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack>
         <Stack direction='row' justifyContent='center' padding={1}>
-          <Typography variant='h5'>Audit Logz</Typography>
+          <Typography variant='h5'>Audit Log</Typography>
         </Stack>
         <Stack justifyContent='center' padding={2}>
           <Stack direction='row' pb={2} spacing={2}>

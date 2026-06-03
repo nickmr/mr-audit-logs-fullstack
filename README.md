@@ -45,7 +45,7 @@ Work through these in order. The frontend objective depends on the backend suppo
 | `search`        | string                                            | Case-insensitive match on `readableAction`                    |
 | `startDate`     | ISO 8601 string                                   | Inclusive lower bound on `timestamp`                          |
 | `endDate`       | ISO 8601 string                                   | Inclusive upper bound on `timestamp`                          |
-| `sortField`     | `timestamp` \| `readableAction` \| `userEmail`    | Column to sort by                                             |
+| `sortField`     | `timestamp` \| `action` \| `userEmail`            | Column to sort by                                             |
 | `sortDirection` | `asc` \| `desc`                                   | Sort direction                                                |
 
 Wire these up in `server/src/services/auditLogService.js`. The handler in `server/src/routes/auditLogs.js` already forwards them, so you shouldn't need to touch it. The Prisma schema lives in `server/prisma/schema.prisma`.

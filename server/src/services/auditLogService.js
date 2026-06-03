@@ -11,7 +11,7 @@ async function listAuditLogs(query = {}) {
   //   - search:        string (case-insensitive match on readableAction)
   //   - startDate:     ISO 8601 string (inclusive lower bound on timestamp)
   //   - endDate:       ISO 8601 string (inclusive upper bound on timestamp)
-  //   - sortField:     'timestamp' | 'readableAction' | 'userEmail'
+  //   - sortField:     'timestamp' | 'action' | 'userEmail'
   //   - sortDirection: 'asc' | 'desc'
   //
   // Prisma syntax pointers:
