@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AuditLog {
+  id             String   @id
+  timestamp      DateTime
+  action         String
+  readableAction String   @map("readable_action")
+  description    String   @default("")
+  userName       String   @map("user_name")
+  userEmail      String   @map("user_email")
+
+  @@map("audit_logs")
+}

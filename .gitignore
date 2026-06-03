@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+.idea/
+.vscode/
+
+# server
+server/.env
+server/prisma/dev.db
+server/prisma/dev.db-journal
+
+# client
+client/build/

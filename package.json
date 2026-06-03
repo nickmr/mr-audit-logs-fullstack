@@ -1,0 +1,11 @@
+{
+  "name": "mr-audit-logs-fullstack",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail --names server,client --prefix-colors blue,green \"npm --prefix server run dev\" \"npm --prefix client start\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
