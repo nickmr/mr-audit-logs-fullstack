@@ -48,7 +48,7 @@ function buildQueryString({ searchText, dateRange }) {
   if (searchText) params.set("search", searchText);
   const [startDate, endDate] = dateRange || [];
   if (startDate) params.set("startDate", startDate.toISOString());
-  if (endDate) params.set("endDate", endDate.toISOString());
+  if (endDate) params.set("endDate", endDate.endOf("day").toISOString());
   const queryString = params.toString();
   return queryString ? `?${queryString}` : "";
 }
