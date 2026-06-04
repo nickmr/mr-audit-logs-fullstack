@@ -54,6 +54,8 @@ Work through these in order. The frontend objective depends on the backend suppo
 | `sortField`     | `timestamp` \| `action` \| `userEmail`            | Column to sort by                                             |
 | `sortDirection` | `asc` \| `desc`                                   | Sort direction                                                |
 
+#### Your challenge
+
 **Wire the params up in [`server/src/services/auditLogService.js`](server/src/services/auditLogService.js)** — `listAuditLogs` has a TODO comment with the available query fields and the Prisma syntax to use. The handler in [`server/src/routes/auditLogs.js`](server/src/routes/auditLogs.js) already forwards them, so you shouldn't need to touch it. The Prisma schema lives in [`server/prisma/schema.prisma`](server/prisma/schema.prisma).
 
 A test suite at [`server/src/services/auditLogService.test.js`](server/src/services/auditLogService.test.js) doubles as the spec. Run `make test` and make them all green. Add more cases if you see something worth covering.
