@@ -64,9 +64,11 @@ Anything else we should consider?
 
 ### 2. Frontend DateRangePicker
 
-**Add MUI's `DateRangePicker` next to the search box** on [`client/src/pages/AuditLogsPage.jsx`](client/src/pages/AuditLogsPage.jsx). Picking a range should filter the table by hitting the `startDate` and `endDate` params from step 1.
-
 ![goal](./docs/goal.png)
+
+#### Your challenge
+
+**Add MUI's `DateRangePicker` next to the search box** on [`client/src/pages/AuditLogsPage.jsx`](client/src/pages/AuditLogsPage.jsx). Picking a range should filter the table by hitting the `startDate` and `endDate` params from step 1.
 
 The hook at [`client/src/api/useQueryAuditLogs.js`](client/src/api/useQueryAuditLogs.js) already accepts a `dateRange` arg and forwards it to the API. You just need to plumb the picker's value into it.
 
