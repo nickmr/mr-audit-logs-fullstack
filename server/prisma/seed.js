@@ -13,7 +13,10 @@ async function main() {
       return;
     }
     const records = loadSeedRecords();
-    await prisma.auditLog.createMany({ data: records.map(toAuditLogRow) });
+    const shiftTimestamp = buildTimestampShifter(records);
+    await prisma.auditLog.createMany({
+      data: records.map((record) => toAuditLogRow(record, shiftTimestamp)),
+    });
     console.log(`Seeded ${records.length} audit logs.`);
   } finally {
     await prisma.$disconnect();
@@ -24,10 +27,19 @@ function loadSeedRecords() {
   return JSON.parse(fs.readFileSync(SEED_FILE, 'utf8'));
 }
 
-function toAuditLogRow(record) {
+// Anchor the most recent seed entry to "now" so candidates see fresh
+// timestamps regardless of when the repo was set up.
+function buildTimestampShifter(records) {
+  const epochs = records.map((record) => new Date(record.timestamp).getTime());
+  const latest = Math.max(...epochs);
+  const offset = Date.now() - latest;
+  return (originalIsoString) => new Date(new Date(originalIsoString).getTime() + offset);
+}
+
+function toAuditLogRow(record, shiftTimestamp) {
   return {
     id: record.id,
-    timestamp: new Date(record.timestamp),
+    timestamp: shiftTimestamp(record.timestamp),
     action: record.action,
     readableAction: record.readableAction,
     description: record.description || '',
