@@ -57,9 +57,9 @@ A few other things we'll be looking at:
 - Input validation. What happens when `sortField` is `"; DROP TABLE audit_logs"`?
 - Whether sorting and filtering happen in the database or in JS after the fact.
 
-### 2. Frontend DateTimeRangePicker
+### 2. Frontend DateRangePicker
 
-Add MUI's `DateTimeRangePicker` next to the search box on the audit logs page. Picking a range should filter the table by hitting the `startDate` and `endDate` params from step 1.
+Add MUI's `DateRangePicker` next to the search box on the audit logs page. Picking a range should filter the table by hitting the `startDate` and `endDate` params from step 1.
 
 ![goal](./docs/goal.png)
 
