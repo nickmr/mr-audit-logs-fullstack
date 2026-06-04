@@ -1,4 +1,4 @@
-.PHONY: help setup install install-root install-server install-client migrate seed reset-db server client dev test clean
+.PHONY: help setup install install-root install-server install-client ensure-env migrate seed reset-db server client dev test clean
 
 help:
 	@echo "Targets:"
@@ -26,13 +26,16 @@ install-server:
 install-client:
 	cd client && npm install
 
-migrate:
+ensure-env:
+	@test -f server/.env || (cp server/.env.example server/.env && echo "Created server/.env from .env.example")
+
+migrate: ensure-env
 	cd server && npx prisma migrate dev --name init
 
-seed:
+seed: ensure-env
 	cd server && npm run db:seed
 
-reset-db:
+reset-db: ensure-env
 	cd server && npm run db:reset
 
 server:
