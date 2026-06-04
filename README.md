@@ -52,10 +52,7 @@ Wire these up in `server/src/services/auditLogService.js`. The handler in `serve
 
 A test suite at `server/src/services/auditLogService.test.js` doubles as the spec. Run `make test` and make them all green. Add more cases if you see something worth covering.
 
-A few other things we'll be looking at:
-
-- Input validation. What happens when `sortField` is `"; DROP TABLE audit_logs"`?
-- Whether sorting and filtering happen in the database or in JS after the fact.
+Anything else we should consider?
 
 ### 2. Frontend DateRangePicker
 
