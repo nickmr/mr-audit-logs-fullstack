@@ -48,42 +48,7 @@ describe('listAuditLogs', () => {
     });
   });
 
-  describe('sorting', () => {
-    test('defaults to timestamp desc', async () => {
-      const rows = await listAuditLogs();
-      const timestamps = rows.map((row) => row.timestamp);
-      const sorted = [...timestamps].sort().reverse();
-      assert.deepEqual(timestamps, sorted);
-    });
-
-    test('sorts by action asc', async () => {
-      const rows = await listAuditLogs({ sortField: 'action', sortDirection: 'asc' });
-      const actions = rows.map((row) => row.action);
-      assert.deepEqual(actions, [...actions].sort());
-    });
-
-    test('sorts by userEmail desc', async () => {
-      const rows = await listAuditLogs({ sortField: 'userEmail', sortDirection: 'desc' });
-      const emails = rows.map((row) => row.user.email);
-      assert.deepEqual(emails, [...emails].sort().reverse());
-    });
-  });
-
   describe('validation', () => {
-    test('rejects unknown sortField (including injection attempts)', async () => {
-      await assert.rejects(
-        () => listAuditLogs({ sortField: "'; DROP TABLE audit_logs" }),
-        { name: 'BadRequestError' }
-      );
-    });
-
-    test('rejects unknown sortDirection', async () => {
-      await assert.rejects(
-        () => listAuditLogs({ sortDirection: 'sideways' }),
-        { name: 'BadRequestError' }
-      );
-    });
-
     test('rejects unparseable startDate', async () => {
       await assert.rejects(
         () => listAuditLogs({ startDate: 'yesterday' }),

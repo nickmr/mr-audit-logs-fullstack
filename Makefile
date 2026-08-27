@@ -1,7 +1,8 @@
-.PHONY: help setup install install-root install-server install-client ensure-env migrate seed reset-db server client dev test clean
+.PHONY: help start setup install install-root install-server install-client ensure-env migrate seed reset-db server client dev test clean
 
 help:
 	@echo "Targets:"
+	@echo "  start       Set up (idempotent) and run both servers"
 	@echo "  setup       Install deps, run migrations, seed the database"
 	@echo "  install     Install deps for client and server"
 	@echo "  migrate     Apply Prisma migrations (creates dev.db on first run)"
@@ -12,6 +13,8 @@ help:
 	@echo "  dev         Run both server and client (Ctrl+C stops both)"
 	@echo "  test        Run server and client test suites"
 	@echo "  clean       Remove node_modules and the SQLite database"
+
+start: setup dev
 
 setup: install migrate seed
 

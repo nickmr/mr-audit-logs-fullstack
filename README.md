@@ -1,62 +1,42 @@
 # Audit Logs Full-Stack Interview
 
-A small app for browsing audit logs. The repo has two pieces:
+A small app for browsing audit logs.
 
-- `client/` is the React + MUI frontend. It displays audit logs in a `DataGrid` with a search input.
-- `server/` is the Node + Express + Prisma backend. It serves audit logs from a seeded SQLite database.
-
-The frontend already calls the backend (`GET /api/audit-logs`), but **nothing is actually wired up yet:**
-
-- The search input sends a `search` query param to the API, but the API ignores it. Typing in the search box will not filter the table.
-- The API accepts `startDate`, `endDate`, `sortField`, and `sortDirection` and ignores those too.
-- There is no date range picker on the page.
-
-The objectives below walk through implementing the missing pieces.
+- `client/` — React + MUI + Vite frontend.
+- `server/` — Node + Express + Prisma + SQLite backend.
 
 ## Quick start
 
-First-time setup (installs deps, runs the migration, seeds the DB):
-
 ```bash
-make setup
+make start
 ```
 
-Then run both servers in one terminal:
+`make help` lists the other targets (setup, dev, migrate, seed, reset-db, test, clean).
 
-```bash
-make dev          # client on :3000, server on :3001, Ctrl+C stops both
-```
+## The end result
 
-Or in two terminals, if you prefer separate logs:
+![goal](./docs/goal.png)
 
-```bash
-make server       # http://localhost:3001
-make client       # http://localhost:3000
-```
+The starter has this scaffolded but **nothing is wired up yet** — typing in the search box doesn't filter, there's no date range picker, and the API ignores every query param. Two steps to get there:
 
-The dev server proxies `/api/*` to `http://localhost:3001`, so the frontend talks to the backend without CORS gymnastics.
-
-Run `make help` to see the rest of the targets (migrate, seed, reset-db, test, clean).
+1. **Update the backend API** to fill in the implementation from the scaffold.
+2. **Update the UI** to look like the screenshot above.
 
 ## Objectives
 
-Work through these in order. The frontend objective depends on the backend supporting date range filtering.
+### 1. Backend filtering
 
-### 1. Backend filtering and sorting
+`GET /api/audit-logs` accepts these query params but ignores them today:
 
-`GET /api/audit-logs` accepts these query params but ignores all of them today:
-
-| Param           | Type                                              | Behavior                                                      |
-| --------------- | ------------------------------------------------- | ------------------------------------------------------------- |
-| `search`        | string                                            | Case-insensitive match on `readableAction`                    |
-| `startDate`     | ISO 8601 string                                   | Inclusive lower bound on `timestamp`                          |
-| `endDate`       | ISO 8601 string                                   | Inclusive upper bound on `timestamp`                          |
-| `sortField`     | `timestamp` \| `action` \| `userEmail`            | Column to sort by                                             |
-| `sortDirection` | `asc` \| `desc`                                   | Sort direction                                                |
+| Param       | Type              | Behavior                                        |
+| ----------- | ----------------- | ----------------------------------------------- |
+| `search`    | string            | Case-insensitive match on `readableAction`      |
+| `startDate` | ISO 8601 string   | Inclusive lower bound on `timestamp`            |
+| `endDate`   | ISO 8601 string   | Inclusive upper bound on `timestamp`            |
 
 #### Your challenge
 
-**Wire the params up in [`server/src/services/auditLogService.js`](server/src/services/auditLogService.js)** — `listAuditLogs` has a TODO comment with the available query fields and the Prisma syntax to use. The handler in [`server/src/routes/auditLogs.js`](server/src/routes/auditLogs.js) already forwards them, so you shouldn't need to touch it. The Prisma schema lives in [`server/prisma/schema.prisma`](server/prisma/schema.prisma).
+**Wire the params up in [`server/src/services/auditLogService.js`](server/src/services/auditLogService.js)** — `listAuditLogs` has a `// TODO` marker with inline Prisma syntax hints. The handler in [`server/src/routes/auditLogs.js`](server/src/routes/auditLogs.js) already forwards them, so you shouldn't need to touch it. The Prisma schema lives in [`server/prisma/schema.prisma`](server/prisma/schema.prisma).
 
 A test suite at [`server/src/services/auditLogService.test.js`](server/src/services/auditLogService.test.js) doubles as the spec. Run `make test` and make them all green. Add more cases if you see something worth covering.
 

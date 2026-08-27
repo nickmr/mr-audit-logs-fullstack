@@ -1,26 +1,17 @@
 const { getPrismaClient } = require('../db/client');
 const { BadRequestError } = require('../errors');
 
+// query fields (all optional):
+//   - search:    string, case-insensitive match on readableAction
+//   - startDate: ISO 8601, inclusive lower bound on timestamp
+//   - endDate:   ISO 8601, inclusive upper bound on timestamp
+// For invalid input, `throw new BadRequestError(msg)` — returned as 400.
 async function listAuditLogs(query = {}) {
   const prisma = getPrismaClient();
 
-  // TODO(candidate): apply `search`, `startDate`, `endDate`, `sortField`,
-  // and `sortDirection` from `query` to the findMany call below.
-  //
-  // Available query fields:
-  //   - search:        string (case-insensitive match on readableAction)
-  //   - startDate:     ISO 8601 string (inclusive lower bound on timestamp)
-  //   - endDate:       ISO 8601 string (inclusive upper bound on timestamp)
-  //   - sortField:     'timestamp' | 'action' | 'userEmail'
-  //   - sortDirection: 'asc' | 'desc'
-  //
-  // Prisma syntax pointers:
-  //   prisma.auditLog.findMany({ where, orderBy })
-  //   where:   { fieldName: { contains: 'foo', gte: date, lte: date } }
-  //   orderBy: { fieldName: 'asc' | 'desc' }
-  //
-  // For bad input, `throw new BadRequestError('msg')`. The global error
-  // handler will turn it into a 400 response.
+  // TODO: Implementation here.
+
+  // Prisma: findMany({ where: { fieldName: { contains, gte, lte } } })
   const rows = await prisma.auditLog.findMany();
 
   return rows.map(toApiShape);
