@@ -2,9 +2,6 @@
 
 A small app for browsing audit logs.
 
-- `client/` — React + MUI + Vite frontend.
-- `server/` — Node + Express + Prisma + SQLite backend.
-
 ## Quick start
 
 ```bash
@@ -55,3 +52,8 @@ The hook at [`client/src/api/useQueryAuditLogs.js`](client/src/api/useQueryAudit
 ### 3. Refactor the frontend
 
 There's a lot of tech debt at MR. The frontend in this example was built in a similarly messy way. How would you clean things up?
+
+## Stack
+
+- `client/` — React + MUI + Vite.
+- `server/` — Node + Express + Prisma + SQLite.
