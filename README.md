@@ -8,8 +8,6 @@ A small app for browsing audit logs.
 make start
 ```
 
-`make help` lists the other targets (setup, dev, migrate, seed, reset-db, test, clean).
-
 ## The end result
 
 ![goal](./docs/goal.png)
